@@ -388,7 +388,7 @@ const BookingSection = ({ id, title, items, startNumber, onBook }: { id: string,
 const WhatsAppButton = () => {
   return (
     <motion.a
-      href="https://wa.me/919082073899"
+      href="https://wa.me/917768941772"
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}
@@ -412,10 +412,18 @@ const WhatsAppButton = () => {
 };
 
 const CustomCursor = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    setIsDesktop(mediaQuery.matches);
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktop) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
     };
@@ -423,10 +431,10 @@ const CustomCursor = () => {
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
-        target.tagName === 'A' || 
-        target.tagName === 'BUTTON' || 
-        target.closest('button') || 
-        target.classList.contains('cursor-pointer')
+        target.tagName === "A" ||
+        target.tagName === "BUTTON" ||
+        target.closest("button") ||
+        target.classList.contains("cursor-pointer")
       ) {
         setIsHovering(true);
       } else {
@@ -434,13 +442,17 @@ const CustomCursor = () => {
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseover", handleMouseOver);
+
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, []);
+  }, [isDesktop]);
+
+  // ❌ disable on mobile
+  if (!isDesktop) return null;
 
   return (
     <>
@@ -450,17 +462,18 @@ const CustomCursor = () => {
           x: position.x - 16,
           y: position.y - 16,
           scale: isHovering ? 2.5 : 1,
-          backgroundColor: isHovering ? 'rgba(212, 175, 55, 0.1)' : 'transparent',
+          backgroundColor: isHovering ? "rgba(212, 175, 55, 0.1)" : "transparent",
         }}
-        transition={{ type: 'spring', damping: 20, stiffness: 250, mass: 0.5 }}
+        transition={{ type: "spring", damping: 20, stiffness: 250, mass: 0.5 }}
       />
+
       <motion.div
         className="fixed top-0 left-0 w-1.5 h-1.5 bg-gold rounded-full pointer-events-none z-[9999]"
         animate={{
           x: position.x - 3,
           y: position.y - 3,
         }}
-        transition={{ type: 'spring', damping: 30, stiffness: 500, mass: 0.2 }}
+        transition={{ type: "spring", damping: 30, stiffness: 500, mass: 0.2 }}
       />
     </>
   );
@@ -988,7 +1001,7 @@ const Portfolio = () => {
     { id: 'Sunidhi Chauhan', title: "AIIMS Raipur", category: "College Fests", img: suni1 },
     { id: 'Shreya Ghoshal', title: "Mithibai, Kshitij", category: "College Fests", img: sh1 },
     { id: 'luxury-launch', title: "Luxury Brand Launch", category: "Corporate", img: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=2012" },
-    { id: 'artist-showcase', title: "Artist Showcase", category: "College Fests", img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=2070" },
+    { id: 'artist-showcase', title: "Artist Showcase", category: "College Fests", img: con },
 
 
   ];
@@ -1293,7 +1306,7 @@ const [status, setStatus] = useState("");
                 </div>
                 <div>
                   <h4 className="text-[10px] uppercase tracking-widest font-bold text-black/40 mb-1">Call Us</h4>
-                  <p className="text-lg font-medium text-black">+919082073899</p>
+                  <p className="text-lg font-medium text-black">+917768941772</p>
                 </div>
               </div>
               <div className="flex items-start gap-6 group">
@@ -1514,7 +1527,7 @@ const prevSlide = () => {
     { id: 'Sunidhi Chauhan', title: "AIIMS Nagpur", category: "College Festss", images: [suni1,suni2,suni3,suni4,suni5],date: "December 2023", location: "Nagpur, India", description: "A high-energy music festival with state-of-the-art sound, lighting, and stage production featuring Sunidhi Chauhan." },
     { id: 'Shreya Ghoshal', title: "Mithibai,Kshitij", category: "College Fests", images:[sh1,sh2,sh3,sh4,sh5,sh6] , date: "Jan 2026", location: "Mumbai, India", description: "A massive college festival with multiple stages, celebrity guest appearances, and a diverse range of cultural competitions." },
     { id: 'luxury-launch', title: "Luxury Brand Launch", category: "Corporate", images: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=2012", date: "August 2023", location: "Dubai, UAE", description: "An exclusive product reveal for a luxury automotive brand, featuring cinematic projection mapping and elite guest management." },
-    { id: 'artist-showcase', title: "Artist Showcase", category: "College Festss", images: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=2070", date: "May 2023", location: "London, UK", description: "An intimate College Fests series showcasing emerging talent, with bespoke stage design and high-fidelity audio production." },
+    { id: 'artist-showcase', title: "Artist Showcase", category: "College Festss", images: [suni1, "https://akm-img-a-in.tosshub.com/lingo/brt/images/story/202404/662f71d9be800-10-wedding-djs-to-book-for-your-wedding-290928589-16x9.png",sh1,suni4,sh5 ] , date: "May 2023", location: "London, UK", description: "An intimate College Fests series showcasing emerging talent, with bespoke stage design and high-fidelity audio production." },
   ];
 
   const project = projects.find(p => p.id === id);
@@ -1605,9 +1618,11 @@ const prevSlide = () => {
               </ul>
             </div>
 
-            <button className="mt-16 px-12 py-5 bg-gold text-black text-xs uppercase tracking-[0.3em] font-bold hover:bg-white transition-all w-full md:w-auto">
-              Enquire About Similar Events
-            </button>
+            <Link to="/contact">
+  <button className="mt-16 px-12 py-5 bg-gold text-black text-xs uppercase tracking-[0.3em] font-bold hover:bg-white transition-all w-full md:w-auto">
+    Enquire About Similar Events
+  </button>
+</Link>
           </motion.div>
         </div>
       </div>
