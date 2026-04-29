@@ -48,6 +48,7 @@ import {
   Quote,
   Images
 } from 'lucide-react';
+import Landing from "./Landing";
 //artists
 import s from "../src/assets/artists/sunidhi.jpg"
 import shreya from "../src/assets/artists/shreya.jpg"
@@ -2008,6 +2009,7 @@ export default function App() {
           <Route path="/speakers" element={<SpeakersPage onBook={openModal} />} />
           <Route path="/artists" element={<ArtistsPage onBook={openModal} />} />
           <Route path="/event/:id" element={<EventDetailPage />} />
+          <Route path="/landing" element={<Landing />} />
         </Routes>
 
         <Footer />
