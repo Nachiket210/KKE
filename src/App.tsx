@@ -45,10 +45,10 @@ import {
   Camera,
   ArrowRight,
   ExternalLink,
-  Quote,
+  Quote,  
   Images
 } from 'lucide-react';
-import Landing from "./Landing";
+import LandingPage from "./landing";
 //artists
 import s from "../src/assets/artists/sunidhi.jpg"
 import shreya from "../src/assets/artists/shreya.jpg"
@@ -1993,32 +1993,36 @@ export default function App() {
   };
 
   return (
-    <Router>
-      <div className="font-sans bg-white min-h-screen text-black">
-        <ScrollToTop />
-        <CustomCursor />
-        <WhatsAppButton />
-        <Navbar />
-        
-        <Routes>
-          <Route path="/" element={<MainPage onBook={openModal} />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/speakers" element={<SpeakersPage onBook={openModal} />} />
-          <Route path="/artists" element={<ArtistsPage onBook={openModal} />} />
-          <Route path="/event/:id" element={<EventDetailPage />} />
-          <Route path="/landing" element={<Landing />} />
-        </Routes>
+<Router>
+  <div className="font-sans bg-white min-h-screen text-black">
+    <ScrollToTop />
+    <CustomCursor />
+    <WhatsAppButton />
 
-        <Footer />
-        <ContactModal 
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
-          title={selectedTalent} 
-        />
-      </div>
-    </Router>
+    {/* ✅ Hide Navbar on landing */}
+    {location.pathname !== "/landing" && <Navbar />}
+
+    <Routes>
+      <Route path="/" element={<MainPage onBook={openModal} />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/services" element={<ServicesPage />} />
+      <Route path="/portfolio" element={<PortfolioPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/speakers" element={<SpeakersPage onBook={openModal} />} />
+      <Route path="/artists" element={<ArtistsPage onBook={openModal} />} />
+      <Route path="/event/:id" element={<EventDetailPage />} />
+      <Route path="/landing" element={<LandingPage />} />
+    </Routes>
+
+    {/* ✅ Hide Footer on landing */}
+    {location.pathname !== "/landing" && <Footer />}
+
+    <ContactModal 
+      isOpen={isModalOpen} 
+      onClose={() => setIsModalOpen(false)} 
+      title={selectedTalent} 
+    />
+  </div>
+</Router>
   );
 }
